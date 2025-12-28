@@ -48,7 +48,6 @@ sections.forEach((section, index) => {
     containerAnimation: tween,
     start: 'left 50%',
     animation: gsap.to(section.querySelector("h2"), { scale: 0.6, }),
-    
     end:'right 50%',
     
     scrub: true,
@@ -66,14 +65,10 @@ sections.forEach((section, index) => {
     //     mapsAni.pause(0)
     //   }
 
-    onToggle:(self)=> self.isActive? mapsAni.play() : mapsAni.pause(0)
+    onToggle:(self)=> {self.isActive? mapsAni.play() : mapsAni.pause(0)
     }
 
 
 
   })
 })
-
-
-
-
