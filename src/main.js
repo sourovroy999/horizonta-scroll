@@ -1,15 +1,29 @@
 import gsap from 'gsap';
 import './style.css'
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import DrawSVGPlugin from 'gsap/DrawSVGPlugin';
 
 gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(DrawSVGPlugin)
 
 
 const races = document.querySelector(".races");
 
 function getScrollAmount() {
   let racesScrollWidth = races.scrollWidth;
-  return -(racesScrollWidth - window.innerWidth )
+  const lastItemWidth=document.querySelector('.races div:last-of-type h2').offsetWidth
+
+  let windowWidth=window.innerWidth
+
+  console.log(lastItemWidth, windowWidth);
+
+  let padding=(windowWidth/2)-(lastItemWidth/2)
+  
+
+
+
+
+  return -(racesScrollWidth - windowWidth ) -padding
 }
 
 const tween = gsap.fromTo(races, {
@@ -39,8 +53,19 @@ const maps=gsap.utils.toArray('.map')
 sections.forEach((section, index) => {
 
   const map=maps[index]
+
+  const ellipse=map.querySelector('ellipse')
+  const track=map.querySelector('.track')
+  const highlight=map.querySelector('.highlight')
+
   const mapsAni=gsap.timeline({paused:true})
-  .from(map, {scale:0.5, rotation:-20})
+  .from([ellipse, track], {
+    scale:0,
+    transformOrigin:'50% 50%',
+    ease:'back',
+    stagger:0.1,
+  })
+  .from(highlight, {drawSVG:0, ease:'power1.inOut'}, "-=0.2")
   .to(map, {opacity:1}, 0)
 
   ScrollTrigger.create({

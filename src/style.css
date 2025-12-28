@@ -21,8 +21,8 @@ body {
 	margin:0;	
 }
 
-.races h2:last-of-type {
-	/* background:#e1e1ff; */
+.races div:last-of-type h2{
+	background:#e1e1ff;
 }
 
 .lightBG {
